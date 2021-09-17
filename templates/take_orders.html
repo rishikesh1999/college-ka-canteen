@@ -157,7 +157,7 @@ for(var temp of accept_orders_buttons){
 for(var temp1 of deliver_orders_buttons){
  temp1.addEventListener("click",function_deliver);
 }
-const chef_websocket=new WebSocket("wss://college-ka-canteen.herokuapp.com/ws/college_chef/accept_order/");
+const chef_websocket=new WebSocket("ws://college-ka-canteen.herokuapp.com/ws/college_chef/accept_order/");
 chef_websocket.onmessage=function(e){
   var o=JSON.parse(e.data);
   console.log("e",e);
