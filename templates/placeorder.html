@@ -1,0 +1,53 @@
+{% extends "home.html" %}
+{% block main_content %}
+<div class="d-flex flex-row">
+
+<div class="p-2">
+
+
+<div style="height:100%;widht:30%;" class="collapse p-0" id="collapseExample">
+<div class="card card-body">
+<ul class="border-0">
+<li  style="width:100%;" class="btn btn-info">Home
+</li><br><br>
+<li  style="width:100%;" class="btn btn-info">My Account
+</li><br><br>
+<li  style="width:100%;" class="btn btn-info">Help & Support
+</li><br><br>
+<li  style="width:100%;" id="orders" class="btn btn-info">Orders</li>
+<br><br>
+<li  style="width:100%;" class="btn btn-info">Cantact Us
+</ul>
+
+</div>
+</div>
+</div>
+
+
+
+<div class="container jumbotron p-2">
+
+<form action="http://college-ka-canteen.herokuapp.com/payment/" method="post">
+
+<h2>Total Items : <span>{{cart_value}}</span></h2>
+<h1>Please confirm the details below and proceed to payment gateway</h1>
+<h2>Amount To be paid :Rs.<span>{{final_value}}</span></h2>
+{% csrf_token %}
+<input type="submit"  class="btn btn-lg  btn-block  btn-success" name="Proceed" value="Proceed">
+
+
+
+</form>
+<form  action="http://college-ka-canteen.herokuapp.com/cancel/" method="post">
+  {% csrf_token %}
+  <input type="submit"  class="btn btn-lg  btn-block  btn-danger" name="Proceed" value="Cancel">
+
+</form>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

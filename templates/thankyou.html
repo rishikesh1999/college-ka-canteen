@@ -1,0 +1,36 @@
+{% extends "home.html" %}
+{% block main_content %}
+<div class="d-flex flex-row">
+<div class="d-flex flex-row">
+
+
+
+
+
+<div style="height:100%;widht:30%;" class="collapse p-0" id="collapseExample">
+<div class="card card-body">
+<ul class="border-0">
+<li  style="width:100%;" class="btn btn-info">Home
+</li><br><br>
+<li  style="width:100%;" class="btn btn-info">My Account
+</li><br><br>
+<li  style="width:100%;" class="btn btn-info">Help & Support
+</li><br><br>
+<li  style="width:100%;" id="orders" class="btn btn-info">Orders</li>
+<br><br>
+<li  style="width:100%;" class="btn btn-info">Cantact Us
+</ul>
+
+</div>
+</div>
+</div>
+
+
+<div class="container jumbotron p-2">
+  <h1>Order has placed succesfully,order ref number is {{order_no}}</h1>
+  <a href="http://college-ka-canteen.herokuapp.com" class="btn btn-lg btn-block btn-success">Click here to go home page</a>
+
+</div> </div>
+
+
+{% endblock %}

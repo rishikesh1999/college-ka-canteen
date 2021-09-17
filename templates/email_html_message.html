@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>OrderDetails</title>
+  </head>
+  <body>
+    <div style="background-color:gray;color:white;">
+      <h2>Hello {{x.name}}</h2>
+      <p>Your order ref no:{{order_no}},has been placed successfully and you can track your from this link...</p>
+      <h4>Order Summary</h4>
+      <hr>
+      <h4>Total amount:Rs.<span style="color:red;">{{final_value}}</span></h4>
+      <h4>Total Discount:Rs.<span style="color:red;">0</span></h4>
+
+      <h4>Number of items:<span style="color:red;">{{final_total_items}}</span></h4>
+
+<p style="background-color:black;color:white;"><span style="color:red;">Note:</span>This mail is generated as development process ,we really not dont send or dispatch items.</p>
+    </div>
+  </body>
+</html>

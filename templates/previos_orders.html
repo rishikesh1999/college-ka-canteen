@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Take orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="navbar-brand" href="#">College Canteen</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="http://college-ka-canteen.herokuapp.com/college_chef/take_orders/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="http://college-ka-canteen.herokuapp.com/college_chef/view_orders_range/">Previos orders <span class="sr-only">(current)</span></a>
+        </li>
+
+
+
+      <li class="nav-item">
+      </li>
+    </ul>
+    {% block login %}
+
+
+
+
+
+    &nbsp&nbsp&nbsp&nbsp
+    <a href="http://college-ka-canteen.herokuapp.com/college_chef/chef_logout/">
+    <button type="button" name="button" class="btn btn-danger" >Logout</button></a>&nbsp&nbsp&nbsp&nbsp
+
+{%endblock%}
+
+
+
+    </div>
+  </nav><div class="jumbotron container">
+    <form class="form-group"  method="post">
+      {{form.as_p}}
+      {% csrf_token %}
+      <input type="submit" name="" class="btn btn-lg btn-success" value="Fetch Orders">
+    </form>
+
+  </div>
+  <div class="container jumbotron">
+
+    {% if orders %}<div class="font-italicn border border-primary shadow-lg p-3 mb-5 bg-white rounded" style="text-align:center;">
+      <h2><u>Fetched Data based on your search</u></h2>
+      <h3>Total number of orders in the give date range :{{tno}}</h3>
+      <h3>Total order value in the given date range :{{tov}}</h3>
+    </div>
+
+    <div class="card-body" style="text-align:center;">
+      <h1><u>Orders</u></h1>
+      <table border="3px;solid;black" style="margin-left:25%;border:2px;" class="shadow-lg p-3 mb-5 bg-white rounded rounded-sm">
+        <thead class="rounded-sm">
+          <th><h4 style="font-family:cursive;" >Order No.</h4></th>
+          <th><h4 style="font-family:cursive;" >Order Value</h4></th>
+          <th><h4 style="font-family:cursive;" >Order Date</h4></th>
+        </thead>
+    {% for x in orders %}
+    <tbody>
+      <tr>
+        <td><h4><span style="color:red;">{{x.id}}</span></h4></td>
+
+        <td><h4><span style="color:red;">{{x.order_value}}</span></h4></td>
+
+        <td><h4><span style="color:red;">{{x.order_date}}</span></h4></td>
+      </tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<h1>No orders present based on given range..</h1>
+{% endif %}
+  </div>

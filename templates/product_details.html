@@ -1,0 +1,170 @@
+{% extends "home.html" %}
+{% block main_content %}
+
+{% load static %}
+{% if invalid_user_flag%}
+    {% block invalid_login %}
+    <div style="position: fixed;z-index:3; top: 8; right:0;" id="invalid" role="alert" aria-live="assertive" aria-atomic="true" class="toast" style="color:black;" data-autohide="false">
+      <div class="toast-header">
+
+        <strong class="mr-auto" style="color:black;">CollegeCanteen</strong>
+        <small>{{login_date}}</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        <h6>Sorry invalid username or password.Please enter correct login credentials.</h6>
+        <button type="button" id="loginbutton" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Login Again</button>
+
+      </div>
+    </div>
+
+{% endblock %}
+{% endif %}
+  <div class="d-flex flex-row">
+    <div style="height:100%;widht:30%;" class="collapse p-0" id="collapseExample">
+    <div class="card card-body">
+    <ul class="border-0">
+    <li  style="width:100%;" class="btn btn-info">Home
+    </li><br><br>
+    <li  style="width:100%;" class="btn btn-info">My Account
+    </li><br><br>
+    <li  style="width:100%;" class="btn btn-info">Help & Support
+    </li><br><br>
+    <li  style="width:100%;" id="orders" class="btn btn-info">Orders</li>
+    <br><br>
+    <li  style="width:100%;" class="btn btn-info">Cantact Us
+    </ul>
+
+    </div>
+    </div>
+
+<div class="container">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="http://college-ka-canteen.herokuapp.com">Home</a></li>
+      <li class="breadcrumb-item"><a href="http://college-ka-canteen.herokuapp.com/catogaries/{{cat}}/">{{cat|title}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ food_item.fname|title}}</li>
+    </ol>
+  </nav>
+  <center>
+        <div class="row" style="margin:0px">
+            <div class="col-md-4 col-sm-6"
+                 >
+               <img width="100%" height="78%" src="http://college-ka-canteen.herokuapp.com/view_img/{{food_item.id}}/" alt=""></img>
+            </div>
+            <div class="col-md-4 col-sm-6"
+                 >
+              <div class="col shadow-lg p-3 mb-5 bg-white rounded align-items-center">
+      <h2>{{food_item.fname}}</h2>
+      <hr>
+      <h4>MRP:Rs. <strong>{{food_item.fprice}}</strong></h4>
+      <h4><strong>No return </strong> <strong>No refund</strong></h4>
+
+    </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+  <div class="col  shadow-lg p-3 mb-5 bg-white rounded-lg align-items-center">
+
+
+<form method="post" action="">
+  {% if food_item.fquantity > 0 %}
+  <h2 style="color:red;">Price:Rs {{food_item.fprice}}</h2>
+
+ <button type="button"  class="btn btn-sm btn-info" id="decqty" name="button">-</button><input class="form-group mx-sm-1 mb-3" type="number" id="qty" name="qty" value="{{value}}"><button type="button" id="incqty" class="btn btn-sm btn-info" name="button">+</button>
+ <button class="btn btn-lg btn-warning btn-block" id="addtocart" type="button" name="button"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+</svg>Add to Cart</button>
+ <button  class="btn  btn-lg btn-success btn-block" id="buynow" type="button" name="button">Buy Now</button>
+{% else %}
+<h2 style="color:red;">Out of Stock</h2>
+{% endif %}
+ <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+   <div class="toast-header">
+
+     <strong class="mr-auto">Info</strong>
+     <small id="titletime" class="text-muted"></small>
+     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div id="toastinner" class="toast-body">
+
+   </div>
+ </div>
+{% csrf_token %}</form>
+
+ </div>
+
+            </div>
+        </div>
+    </center>
+
+
+  <div class="">
+
+    <form id="productid" action="http://college-ka-canteen.herokuapp.com/post_comment/{{food_item.id}}/" method="post">
+
+
+    <div class="form-group">
+        <h1>Write a review  </h1>
+   <label for="exampleFormControlInput1">Email address</label>
+   <input type="email" name="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+ </div>
+    <div  class="form-group">
+      <label for="exampleFormControlTextarea1">Example textarea</label>
+      <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+{% csrf_token %}
+<input type="submit"  value="POST" class="btn btn-lg btn-success">
+  </form>
+{% with n=number%}
+{%endwith%}
+<div class="container jumbotron">
+{% ifnotequal number  1  %}
+{% ifnotequal number  0  %}
+<h2>Reviews </h2>
+{% else %}
+
+<h2>No reviews  </h2>
+{% endifnotequal%}
+{% else %}
+<h2>Review</h2>
+{% endifnotequal%}
+
+{% for x in comments%}
+<div class="card text-center">
+
+  <div class="card-body">
+    <h3 class="card-title">{{x.cdata}}</h3>
+  <div class="d-flex flex-row">
+    <a href="#" class="btn btn-small btn-danger p-2">Report</a>
+  </div>  </div>
+  <div class="card-footer text-muted">
+  Commented on  {{x.cdate}} by {{x.cemail}}
+  </div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+</div>
+
+
+
+
+  </div>
+
+</div>
+{% endblock %}
+{% block specific_script%}
+<script type="text/javascript" src="{% static "javascript/addqty.js" %}"></script>
+<script type="text/javascript" src="{% static "javascript/home.js" %}"></script>
+{% endblock %}

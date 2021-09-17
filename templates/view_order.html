@@ -1,0 +1,89 @@
+{% extends "home.html"%}
+{% block main_content %}
+{% load static %}
+{% if invalid_user_flag%}
+    {% block invalid_login %}
+    <div style="position: fixed;z-index:3; top: 8; right:0;" id="invalid" role="alert" aria-live="assertive" aria-atomic="true" class="toast" style="color:black;" data-autohide="false">
+      <div class="toast-header">
+
+        <strong class="mr-auto" style="color:black;">CollegeCanteen</strong>
+        <small>{{login_date}}</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        <h6>Sorry invalid username or password.Please enter correct login credentials.</h6>
+        <button type="button" id="loginbutton" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Login Again</button>
+
+      </div>
+    </div>
+
+{% endblock %}
+{% endif %}
+<div class="d-flex flex-row">
+
+
+<div class="p-2">
+
+
+
+<div style="height:100%;widht:30%;" class="collapse p-0" id="collapseExample">
+<div class="card card-body">
+<ul class="border-0">
+<li  style="width:100%;" class="btn btn-info">Home
+</li><br><br>
+<li  style="width:100%;" class="btn btn-info">My Account
+</li><br><br>
+<li  style="width:100%;" class="btn btn-info">Help & Support
+</li><br><br>
+<li  style="width:100%;" id="orders" class="btn btn-info">Orders</li>
+<br><br>
+<li  style="width:100%;" class="btn btn-info">Cantact Us
+</ul>
+
+</div>
+</div>
+</div>
+
+
+
+<div class="container jumbotron p-2">
+  {% if special_script%}
+<input type="hidden" name="" id="first_login" value="{{first_login}}">
+  {% else %}
+<h1 style="color:red;margin-left:30%;"><u>Your orders</u></h1>
+{% if ordered %}
+<ol class="list-unstyled">
+{% for x in ordered %}
+<div style="margin-left:20%;" class="d-flex flex-row">
+<div class="p-2">
+
+<li class="media">
+  <div class="media-body">
+    <h2 class="mt-0 mb-1" font-style="serif">Order No.{{x.id}}</h2>
+
+    <h2 class="mt-0 mb-1" font-style="serif">Order Value.{{x.order_value}}</h2>
+    <h2><strong>Ordered on:</strong>{{x.order_date}}</h2>  </div><div class="p-2">
+    <a href="http://college-ka-canteen.herokuapp.com/view_specific_order/{{x.id}}/" class="btn btn-lg btn-info">View the Order</a></div>
+</li>
+</div>
+  </div>
+
+
+<br>
+<hr>
+{% endfor %}
+</ol>
+{% else %}
+<h1>No orders found</h1>
+{% endif %}
+{% endif %}
+</div>
+</div>
+{% block special_script %}
+<script type="text/javascript" src="{% static "javascript/order_special_script.js" %}">
+
+</script>
+{% endblock%}
+{% endblock %}

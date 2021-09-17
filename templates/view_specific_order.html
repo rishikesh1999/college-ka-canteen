@@ -1,0 +1,93 @@
+{% extends "home.html" %}
+{% block main_content %}
+
+  <div class="d-flex flex-row">
+
+    <div class="container jumbotron p-2">
+
+
+
+<div class="card text-center align-items-center" >
+  <div class="card-header">
+    <h3>Order no.{{so.id}}</h3>
+  </div>
+    <div class="card-body">
+      <table border="3px;solid;black" style="border:2px;" class="shadow-lg p-3 mb-5 bg-white rounded rounded-sm">
+        <thead class="rounded-sm">
+          <th><h4 style="font-family:cursive;" >Food Name</h4></th>
+          <th><h4 style="font-family:cursive;" >Food Price per Unit</h4></th>
+          <th><h4 style="font-family:cursive;" >Food Quantity</h4></th>
+        </thead>
+    {% for x in order_info %}
+<tbody>
+  <tr>
+    <td><h4><span style="color:red;">{{x.object.food_name | title}}</span></h4></td>
+
+    <td><h4><span style="color:red;">{{x.object.food_price}}</span></h4></td>
+
+    <td><h4><span style="color:red;">{{x.object.food_quantity}}</span></h4></td>
+  </tr>
+
+
+{% endfor %}
+<h4 class="btn btn-info"><span style="font-family:cursive;">Total ordervalue :</span>Rs.{{so.order_value}}</h4>
+</tbody>
+</table>
+
+<h2 style="Order Status">Order status <a href="http://college-ka-canteen.herokuapp.com/view_specific_order/{{so.id}}/" class="btn btn-warning">Track Order</a></h2>
+
+{% if so.order_accepted == "y"%}
+{% if so.order_delivered == "y" %}
+<div class="progress" style="height:10%;">
+  <h5 style="margin-left:65%;border-left:">Order delivered<svg xmlns="https://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" style="color:red;" class="bi bi-arrow-90deg-left" viewBox="0 0 20 20">
+  <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z"/>
+</svg></h5></div>
+<div class="progress">
+
+  <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{%  else %}
+<div class="progress" style="height:10%;">
+  <h5 style="margin-left:50%;border-left:"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z"/>
+</svg>Food Cooked ,Please collect your order</h5></div>
+<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endif %}
+{% else %}
+<div class="progress" style="height:10%;">
+  <h5 style="margin-left:25%;border-left:"><svg xmlns="https://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-arrow-90deg-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M14.854 4.854a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 4H3.5A2.5 2.5 0 0 0 1 6.5v8a.5.5 0 0 0 1 0v-8A1.5 1.5 0 0 1 3.5 5h9.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4z"/>
+</svg>Order placed</h5></div>
+<div class="progress">
+
+  <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+{% endif %}
+
+    <div class="card-footer text-muted">
+     Ordered on {{so.order_date}}
+    </div>
+    </div>
+   </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

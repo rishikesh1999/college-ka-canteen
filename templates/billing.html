@@ -1,0 +1,75 @@
+{% extends "home.html" %}
+{% block main_content %}
+{% load static %}
+  <div class="jumbotron justify-content-center">
+    <div style="height:100%;widht:30%;" class="collapse p-0" id="collapseExample">
+    <div class="card card-body">
+    <ul class="border-0">
+    <li  style="width:100%;" class="btn btn-info">Home
+    </li><br><br>
+    <li  style="width:100%;" class="btn btn-info">My Account
+    </li><br><br>
+    <li  style="width:100%;" class="btn btn-info">Help & Support
+    </li><br><br>
+    <li  style="width:100%;" id="orders" class="btn btn-info">Orders</li>
+    <br><br>
+    <li  style="width:100%;" class="btn btn-info">Cantact Us
+    </ul>
+
+    </div>
+    </div>
+
+
+
+
+<div class=" align-items-center" style="background-color:white;">
+{% if cart_items %}
+<center><h1 class="d-block  display-1" style="background-color:MediumSeaGreen">BILLING</h1></center>
+<center>
+
+<div class="row justify-content-center" style="width:100%;margin:0px;">
+{% for x in cart_items %}
+<div class="col-md-5 col-xs-4" >
+<div class="card " >
+  <img style="height:80%;width:100%;" src="http://college-ka-canteen.herokuapp.com/view_img/{{x.food_id}}/" class="mr-3" alt="...">
+
+  <div class="card-body">
+	<h2 class="mt-0 mb-1">{{x.food_name | title }}</h2>
+<h3>Qty:<strong>{{x.food_quantity}}</strong></h3>
+  <h2>Price per Unit: <span style="color:red;"> Rs.{{x.food_price}}</span></h2>
+        <h4>Discount: <span style="color:blue;">0%</span></h4>
+        <h2>Final Price per Unit: <span style="color:red;"> Rs.{{x.food_price}}</span></h2>
+
+ <button  type="button"  class="btn btn-lg btn-warning"  style="width:90%;height:10%;" name="button">Save For later</button>&nbsp <button type="button" id="delete{{x.food_id}}"   class="btn btn-lg btn-danger" style="width:90%;height:10%;"  name="button">Remove</button>
+
+  </div>
+</div></div>
+  {% endfor %}</div> </center>
+<div class="jumbotron">
+  <form  action="http://college-ka-canteen.herokuapp.com/placeorder/" method="post">
+    {% csrf_token %}
+    <h2 id="final_count_main" >Total Number of Items: <span id="final_count" style="color:blue;">{{cart_value}}</span></h2>
+
+
+    <h2 id="final_value_main">Total Amount: Rs.<span id="final_value" style="color:red;">{{total_value}}</span></h2>
+    <input type="submit" id="final_place_order" class="btn btn-lg btn-block btn-success" name="PlaceOrder" value="PlaceOrder">
+  </form>
+</div>
+{% else %}
+<h1>No items present in cart</h1>
+{% endif %}
+    </div>
+
+  </div>
+
+
+
+
+
+
+{% endblock %}
+{% block specific_script%}
+<script type="text/javascript" src="{% static "javascript/update_cart_billing.js" %}">
+
+</script>
+{% endblock %}

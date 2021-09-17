@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Take orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class="navbar-brand" href="#">College Canteen</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="http://college-ka-canteen.herokuapp.com/college_chef/take_orders/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="http://college-ka-canteen.herokuapp.com/college_chef/view_orders_range/">Previos orders <span class="sr-only">(current)</span></a>
+        </li>
+
+
+
+      <li class="nav-item">
+      </li>
+    </ul>
+    {% block login %}
+
+
+
+
+      <span class="sr-only">unread messages</span></a>
+    &nbsp&nbsp&nbsp&nbsp
+    <a href="http://college-ka-canteen.herokuapp.com/college_chef/chef_logout/">
+    <button type="button" name="button" class="btn btn-danger" >Logout</button></a>&nbsp&nbsp&nbsp&nbsp
+
+{%endblock%}
+
+        <input  id="input_to_search"  type="text"  onInput="update1()">
+<a class="btn btn-success" id="search_for_order" href="#">Search</a>
+
+    </div>
+  </nav>
+    <div class="container" style="width:100%">
+
+
+    <div class="d-flex flex-row align-items-center" >
+      <div class="p-2 align-tems-center" id="not_accepted" style="width:50%;margin:0%;">
+        <h6>Orders to be cooked</h6>
+
+        {% if nao %}
+        {% for x in nao %}
+        <div class="card border-danger mb-3 " id="main_block_{{x.id}}" style="width:100%;" border="2px;solid;red">
+          <div class="card-header">Order no.{{x.id}}</div>
+          <div class="card-body">
+<h5> Ordered on:{{x.order_date}}</h3>
+<table class="shadow-lg p-3 mb-5 bg-black rounded rounded-sm" border="2px;solid;black" style="color:red;margin-left:0%" >
+<thead class="rounded-sm">
+    <th>Food name</th>
+    <th>Food quantity</th>
+</thead>
+<tbody>
+{% for u in x.order %}
+
+
+<tr>
+<td>
+  {{u.object.food_name|title}}
+</td>
+
+<td>
+  {{u.object.food_quantity}}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<button type="button" class="accept" id="{{x.id}}"name="button">Accept</button>
+
+
+
+          </div>
+        </div>
+        <br>
+        {% endfor %}
+        {% else %}
+        <h6 id="a_info">No new orders to accept....</h6>
+        {% endif %}
+      </div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <div class="p-2 " id="not_delivered_main" style="width:50%;margin:0%">
+  <h6>Orders cooked but to be delivered</h6>
+        {% if abndo %}
+        {% for x in abndo %}
+        <div class="card border-success" id="main_block_{{x.id}}"style="width:100%;">
+  <div class="card-header">Order no.{{x.id}}</div>
+          <div class="card-body">
+            <h5> Ordered on:{{x.order_date}}</h3>
+            <table class="shadow-lg   bg-black rounded rounded-sm" border="2px;solid;black" style="color:red;width:100%;margin:0%;float:left;" >
+            <thead class="rounded-sm">
+                <th>Food name</th>
+                <th>Food quantity</th>
+            </thead>
+            <tbody>
+            {% for u in x.order %}
+
+
+            <tr>
+            <td>
+              <p style="overflow-x:scroll;">{{u.object.food_name|title}}</p>
+            </td>
+
+            <td>
+              {{u.object.food_quantity}}
+            </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+            <button type="button" class="not_delivered" id="d{{x.id}}"  name="button">Delivered</button>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2 id="d_info">No orders to deliver......</h2>
+        {% endif %}
+      </div>
+
+
+    </div>    </div>
+<script type="text/javascript">
+accept_orders_buttons=document.getElementsByClassName("accept");
+deliver_orders_buttons=document.getElementsByClassName("not_delivered");
+function accept(e){
+ alert("this is accept")
+ chef_websocket.send(JSON.stringify({"order_id":e.path[0].id,"new_order":0,"c_from_a_to_d":1,"delivery":0}));
+ console.log("sent data is",JSON.stringify({"order_id":e.path[0].id,"new_order":0,"c_from_a_to_d":1,"delivery":0}));
+
+}
+function function_deliver(e){
+ alert("this is deliever")
+ if(confirm("Are you sure to deliver order no:"+e.path[0].id+"\nIf yes please enter ok")){
+ chef_websocket.send(JSON.stringify({"order_id":e.path[0].id,"new_order":0,"c_from_a_to_d":0,"delivery":1}));
+ console.log("sent data is in deliver is ",JSON.stringify({"order_id":e.path[0].id,"new_order":0,"c_from_a_to_d":0,"delivery":1}));
+
+}
+}
+for(var temp of accept_orders_buttons){
+ temp.addEventListener("click",accept);
+}
+for(var temp1 of deliver_orders_buttons){
+ temp1.addEventListener("click",function_deliver);
+}
+const chef_websocket=new WebSocket("wss://college-ka-canteen.herokuapp.com/ws/college_chef/accept_order/");
+chef_websocket.onmessage=function(e){
+  var o=JSON.parse(e.data);
+  console.log("e",e);
+  console.log(o);
+  gz=o;
+  if(o.message!=undefined){
+    o=o.message;
+  }
+console.log(o.new_order)
+console.log(o["new_order"]);
+if(o["new_order"]==1){
+  var div1=document.createElement("div")
+  div1.setAttribute("class","card border-danger mb-3 d-flex p-3")
+  div1.id="main_block_"+o.order_id;
+  div1.style.width="18rem"
+  div1.setAttribute("border","2px;solid;red");
+  var div_header=document.createElement("div")
+  div_header.setAttribute("class","card-header")
+  div_header.innerHTML="Order no."+o.order_id;
+var   div_body=document.createElement("div")
+  h5=document.createElement("h5")
+  h5.innerHTML="Order on"+o.order_date
+var   table=document.createElement("table")
+  table.setAttribute("class","shadow-lg p-3 mb-5 bg-black rounded rounded-sm")
+  table.border="2px;solid;black"
+  table.style.color="red"
+
+  var table_head=document.createElement("thead")
+  table_head.setAttribute("class","rounded-sm")
+var  th1=document.createElement("th")
+var  th2=document.createElement("th")
+  th1.innerHTML="Food name"
+  th2.innerHTML="Food Quantity"
+var  tr=document.createElement("tr")
+  tr.appendChild(th1)
+  table_head.appendChild(tr)
+
+  tr.appendChild(th2)
+  table_head.appendChild(tr)
+var  table_body=document.createElement("tbody")
+
+  for(ov in o.order){
+   tr=document.createElement("tr")
+    var td=document.createElement("td")
+    td.innerHTML=ov;
+    var  td1=document.createElement("td")
+      td1.innerHTML=o.order[ov];
+      tr.appendChild(td);
+      tr.appendChild(td1);
+      table_body.appendChild(tr);
+  }
+
+  table.appendChild(table_head)
+  table.appendChild(table_body)
+
+  var button=document.createElement("button")
+
+  button.type="button"
+  button.setAttribute("class","accept")
+  button.id=o.order_id
+  button.innerHTML="Accept"
+  div_body.appendChild(h5)
+  div_body.appendChild(table)
+  div_body.appendChild(button)
+  div1.appendChild(div_header)
+  div1.appendChild(div_body)
+  div1.style.display="flex"
+  document.getElementById("not_accepted").appendChild(div1)
+  temp=document.getElementById("a_info")
+  if(temp!= undefined){
+    temp.remove()
+  }
+
+  button.addEventListener("click",accept);
+
+}
+else if(o.c_from_a_to_d==1){
+  parent=document.getElementById("main_block_"+o.order_id);
+order_button=document.getElementById(o.order_id)
+order_button.id="d"+order_button.id
+order_button.setAttribute("class","not_delivered")
+order_button.removeEventListener("click",accept)
+order_button.addEventListener("click",function_deliver)
+order_button.innerHTML="Delivered"
+parent.setAttribute("class","card border-success")
+parent.remove()
+document.getElementById("not_delivered_main").appendChild(parent)
+}
+else{
+  console.log(o.order_id)
+  gh=document.getElementById("main_block_"+o.order_id);
+
+document.getElementById("main_block_"+o.order_id).remove()
+
+}
+}
+chef_websocket.onerror=function(e){
+console.log(e);
+console.log("Error occured");
+}
+chef_websocket.onclose=function(e){
+console.log("oops socket closed");
+}
+
+
+
+
+
+
+
+
+
+
+
+</script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "home.html" %}
+{% block login %}
+{% load static %}
+<a href="http://college-ka-canteen.herokuapp.com/billing/" class="btn btn-info">
+
+  Cart <span id="cart" class="badge badge-light">{{cart_value}}</span>
+  <span class="sr-only">unread messages</span></a>
+&nbsp&nbsp&nbsp&nbsp
+<a href="http://college-ka-canteen.herokuapp.com/accounts/logout/">
+<button type="button" name="button" class="btn btn-danger" >Logout</button></a>&nbsp&nbsp&nbsp&nbsp
+{% endblock %}
+{% block specific_script%}
+<script type="text/javascript" src="{% static "javascript/myaccount.js" %}">
+
+</script>
+{% endblock %}
