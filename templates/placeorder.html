@@ -27,7 +27,7 @@
 
 <div class="container jumbotron p-2">
 
-<form action="http://college-ka-canteen.herokuapp.com/payment/" method="post">
+<form action="https://college-ka-canteen.herokuapp.com/payment/" method="post">
 
 <h2>Total Items : <span>{{cart_value}}</span></h2>
 <h1>Please confirm the details below and proceed to payment gateway</h1>
@@ -38,7 +38,7 @@
 
 
 </form>
-<form  action="http://college-ka-canteen.herokuapp.com/cancel/" method="post">
+<form  action="https://college-ka-canteen.herokuapp.com/cancel/" method="post">
   {% csrf_token %}
   <input type="submit"  class="btn btn-lg  btn-block  btn-danger" name="Proceed" value="Cancel">
 
