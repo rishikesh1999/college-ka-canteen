@@ -31,7 +31,7 @@
 {% for x in cart_items %}
 <div class="col-md-5 col-xs-4" >
 <div class="card " >
-  <img style="height:80%;width:100%;" src="http://college-ka-canteen.herokuapp.com/view_img/{{x.food_id}}/" class="mr-3" alt="...">
+  <img style="height:80%;width:100%;" src="https://college-ka-canteen.herokuapp.com/view_img/{{x.food_id}}/" class="mr-3" alt="...">
 
   <div class="card-body">
 	<h2 class="mt-0 mb-1">{{x.food_name | title }}</h2>
@@ -46,7 +46,7 @@
 </div></div>
   {% endfor %}</div> </center>
 <div class="jumbotron">
-  <form  action="http://college-ka-canteen.herokuapp.com/placeorder/" method="post">
+  <form  action="https://college-ka-canteen.herokuapp.com/placeorder/" method="post">
     {% csrf_token %}
     <h2 id="final_count_main" >Total Number of Items: <span id="final_count" style="color:blue;">{{cart_value}}</span></h2>
 
