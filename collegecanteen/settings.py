@@ -130,7 +130,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-LOGOUT_REDIRECT_URL="http://college-ka-canteen.herokuapp.com"
+LOGOUT_REDIRECT_URL="https://college-ka-canteen.herokuapp.com"
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[static_dir]
 STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")

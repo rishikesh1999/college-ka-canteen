@@ -5,7 +5,7 @@ var flag=0;
 atc=document.getElementById("addtocart")
 function f(){
 
-xhr.open("get","http://127.0.0.1:8000/ajax/")
+xhr.open("get","https://college-ka-canteen.herokuapp.com/ajax/")
 xhr.onload=function(){
 
 if(xhr.status == 200){
@@ -17,7 +17,7 @@ if(xhr.status == 200){
 document.getElementById("loginbutton").click()
   }
   else{
-    xhr.open("post","http://127.0.0.1:8000/addtocart/"+document.getElementById("productid").getAttribute("action").charAt(50)+"/")
+    xhr.open("post","https://college-ka-canteen.herokuapp.com/addtocart/"+document.getElementById("productid").getAttribute("action").charAt(50)+"/")
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader("X-CSRFToken",document.cookie.substring(10))
     q=document.getElementById("qty").value
@@ -28,12 +28,12 @@ if(xhr.status == 200){
 
     document.getElementById("cart").innerHTML=dat.cart_value
   document.getElementById("titletime").innerHTML=dat.time
-  document.getElementById("toastinner").innerHTML=dat.food_name +"  Quantity("+q+") added to your cart.."+"<a class='btn btn-success btn-sm' href='http://127.0.0.1:8000/billing/'>Place Order</a>"
+  document.getElementById("toastinner").innerHTML=dat.food_name +"  Quantity("+q+") added to your cart.."+"<a class='btn btn-success btn-sm' href='https://college-ka-canteen.herokuapp.com/billing/'>Place Order</a>"
 
 
   $(".toast").toast("show");
   if(flag==1){
-    window.location.href="http://127.0.0.1:8000/billing/"
+    window.location.href="https://college-ka-canteen.herokuapp.com/billing/"
   }
 }
 

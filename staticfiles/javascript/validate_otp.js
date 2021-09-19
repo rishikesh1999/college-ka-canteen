@@ -1,7 +1,7 @@
 var  xhr=new XMLHttpRequest();
 
 function f (){
-xhr.open("POST","http://127.0.0.1:8000/validate_otp/",true)
+xhr.open("POST","https://college-ka-canteen.herokuapp.com/validate_otp/",true)
 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 xhr.setRequestHeader("X-CSRFToken",document.cookie.substring(10))
 xhr.onload=function(){

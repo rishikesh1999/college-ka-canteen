@@ -37,7 +37,7 @@ def home(r):
         u=authenticate(r,username=r.POST.get("username"),password=r.POST.get("password"))
         if u is not None:
             login(r,u)
-            return redirect("http://127.0.0.1:8000/myaccount/")
+            return redirect("https://college-ka-canteen.herokuapp.com/myaccount/")
         else:
             invalid_user_flag=True
             return render(r,"home.html",{"user_logged_in":user_logged_in,"cart_value":cart_value,"invalid_user_flag":invalid_user_flag,"login_date":datetime.datetime.now()})
@@ -51,7 +51,7 @@ def myaccount(r):
         cart_value=0 if cart_value is None else cart_value
         return render(r,"myaccount.html",{"user_logged_in":user_logged_in,"cart_value":cart_value})
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def search_view(r):
     invalid_user_flag=False
     if(r.POST.get("username")==None or r.POST.get("password")==None):
@@ -62,7 +62,7 @@ def search_view(r):
             if u is not None:
                 login(r,u)
                 user_logged_in=True
-                return redirect("http://127.0.0.1:8000/myaccount/")
+                return redirect("https://college-ka-canteen.herokuapp.com/myaccount/")
             else:
                 user_logged_in=False
                 invalid_user_flag=True
@@ -96,7 +96,7 @@ def catogaries(r,id):
         if u is not None:
             login(r,u)
             user_logged_in=True
-            return redirect("http://127.0.0.1:8000/myaccount/")
+            return redirect("https://college-ka-canteen.herokuapp.com/myaccount/")
         else:
             user_logged_in=False
             invalid_user_flag=True
@@ -151,7 +151,7 @@ def post_comment(r,id):
         c1=comments(cdata=r.POST.get("comment"),cemail=r.POST.get("email"),food_id=f1)
 
         c1.save()
-        return redirect("http://127.0.0.1:8000/"+str(f1.ftag1)+"/"+str(f1.id)+"/")
+        return redirect("https://college-ka-canteen.herokuapp.com/"+str(f1.ftag1)+"/"+str(f1.id)+"/")
 def ajax(r):
     if r.user.id is None:
         return JsonResponse({"v":0})
@@ -175,7 +175,7 @@ def addtocart(r,id):
 
                 return JsonResponse({"food_name":f.fname.title(),"time":s1,"cart_value":cart_value})
         else:
-            return redirect("http://127.0.0.1:8000")
+            return redirect("https://college-ka-canteen.herokuapp.com")
 def billing(r):
     if(r.user.id is not None):
         user_logged_in=True
@@ -186,7 +186,7 @@ def billing(r):
         total_value=cart.objects.filter(user_id=int(r.user.id)).aggregate(food_price__sum=Sum(F("food_price")*F("food_quantity"))).get("food_price__sum")
         return render(r,"billing.html",{"cart_items":c,"total_value":total_value,"user_logged_in":user_logged_in,"cart_value":cart_value})
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def update_cart(r):
     if(r.user.id is not None):
         if(r.method=="POST"):
@@ -198,7 +198,7 @@ def update_cart(r):
             total_value=cart.objects.filter(user_id=int(r.user.id)).aggregate(food_price__sum=Sum(F("food_price")*F("food_quantity"))).get("food_price__sum")
             return JsonResponse({"total_value":total_value,"cart_value":cart_value})
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def placeorder(r):
     if(r.method=="POST"):
         if(r.user.id is not None):
@@ -208,9 +208,9 @@ def placeorder(r):
             final_total_items=cart.objects.filter(user_id=int(r.user.id)).aggregate(Sum("food_quantity")).get("food_quantity__sum")
             return render(r,"placeorder.html",{"user_logged_in":user_logged_in,"cart_value":final_total_items,"final_value":final_amount})
         else:
-            return redirect("http://127.0.0.1:8000")
+            return redirect("https://college-ka-canteen.herokuapp.com")
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def payment(r):
     if(r.method=="POST"):
         if(r.user.id is not None):
@@ -249,16 +249,16 @@ def payment(r):
             user_logged_in=True
             return render(r,"thankyou.html",{"order_no":o1.id,"user_logged_in":user_logged_in,"cart_value":cart_value})
         else:
-            return redirect("http://127.0.0.1:8000")
+            return redirect("https://college-ka-canteen.herokuapp.com")
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def cancel(r):
     pass
 def view_orders(r):
     if(r.method=="POST"):
         status=user_log_in(r)
         if status==True:
-            return redirect("http://127.0.0.1:8000/orders/")
+            return redirect("https://college-ka-canteen.herokuapp.com/orders/")
         else:
             return render(r,"view_order.html",{"user_logged_in":False,"special_script":True,"first_login":0,"invalid_user_flag":True})
     if(r.user.id is not None):
@@ -278,7 +278,7 @@ def view_specific_order(r,id):
         user_logged_in=True
         return render(r,"view_specific_order.html",{"cart_value":cart_value,"user_logged_in":user_logged_in,"order_info":order_info,"so":so})
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def signup(r):
     if(r.method=="POST"):
         if(r.POST.get("signup")=='1'):
@@ -288,14 +288,14 @@ def signup(r):
                 u1.save()
                 u1.set_password(u1.password)
                 u1.save()
-                return redirect("http://127.0.0.1:8000")
+                return redirect("https://college-ka-canteen.herokuapp.com")
             else:
                 return render(r,"signup.html",{"form":u})
         else:
             u=authenticate(r,username=r.POST.get("username"),password=r.POST.get("password"))
             if u is not None:
                 login(r,u)
-                return redirect("http://127.0.0.1:8000/myaccount/")
+                return redirect("https://college-ka-canteen.herokuapp.com/myaccount/")
             else:
                 invalid_user_flag=True
                 return render(r,"home.html",{"user_logged_in":False,"cart_value":0,"invalid_user_flag":invalid_user_flag,"login_date":datetime.datetime.now()})
@@ -304,7 +304,7 @@ def forgot_password(r):
     if(r.method=="POST"):
         return render(r,"otp.html",{"form":otp_form(),"otp_notsent_man":True})
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def validate_user(r):
     if( r.method=="POST"):
         if(r.user.id is None):
@@ -329,7 +329,7 @@ def validate_user(r):
             cart_value=0 if cart_value is None else cart_value
             return render(r,"already_logged_in.html",{"user_logged_in":user_logged_in,"cart_value":cart_value})
     else:
-        return redirect("http://127.0.0.1:8000")
+        return redirect("https://college-ka-canteen.herokuapp.com")
 def validate_otp(r):
     if(r.user.id is None):
         if(r.method=="POST"):
@@ -362,7 +362,7 @@ def validate_otp(r):
                     new_error_var=of1.errors.get("__all__")
                     return render(r,"otp.html",{"form":of1,"username":r.session.get("username"),"otp_sent_man":True,"otp_notsent_man":False,"errors":new_error_var})
         else:
-            return redirect("http://127.0.0.1:8000")
+            return redirect("https://college-ka-canteen.herokuapp.com")
     else:
         user_logged_in=True
         cart_value=cart.objects.filter(user_id=int(r.user.id)).aggregate(Sum("food_quantity")).get("food_quantity__sum")
@@ -376,7 +376,7 @@ def college_chef(r):
             u=authenticate(r,username=f.cleaned_data.get("username"),password=f.cleaned_data.get("password"))
             if(u is not None):
                 login(r,u)
-                return redirect("http://127.0.0.1:8000/college_chef/take_orders/")
+                return redirect("https://college-ka-canteen.herokuapp.com/college_chef/take_orders/")
         else:
             return render(r,"college_chef.html",{"form":f})
     else:
@@ -404,4 +404,4 @@ def view_orders_range(r):
         return render(r,"previos_orders.html",{"form":orders_range()})
 def chef_logout(r):
     logout(r)
-    return redirect("http://127.0.0.1:8000/college_chef/take_orders/")
+    return redirect("https://college-ka-canteen.herokuapp.com/college_chef/take_orders/")

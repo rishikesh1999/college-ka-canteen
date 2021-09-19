@@ -2,7 +2,7 @@ var xhr=new XMLHttpRequest();
 function remove(food_id){
   food_id=food_id.target.id.substring(6)
 
-xhr.open("post","http://127.0.0.1:8000/update_cart/")
+xhr.open("post","https://college-ka-canteen.herokuapp.com/update_cart/")
 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 xhr.setRequestHeader("X-CSRFToken",document.cookie.substring(10))
 xhr.onload=function(){

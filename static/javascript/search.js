@@ -3,7 +3,7 @@ var dat;
 
 var j;
 function f(bn){
-xhr.open("get","http://127.0.0.1:8000/ajax/")
+xhr.open("get","https://college-ka-canteen.herokuapp.com/ajax/")
 xhr.onload=function(){
 if(xhr.status == 200){
    dat=JSON.parse(xhr.responseText).v
@@ -14,7 +14,7 @@ document.getElementById("loginbutton").click()
   else{
 
    j=bn.path[0].attributes.id.value.substring(9)
-    xhr.open("post","http://127.0.0.1:8000/addtocart/"+j+"/")
+    xhr.open("post","https://college-ka-canteen.herokuapp.com/addtocart/"+j+"/")
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader("X-CSRFToken",document.cookie.substring(10))
 

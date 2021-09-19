@@ -5,7 +5,7 @@ if(fl==0){
   function f(){
 
   $("#invalid").toast("hide")
-  document.getElementById("login_form").setAttribute("action","http://127.0.0.1:8000/orders/")
+  document.getElementById("login_form").setAttribute("action","https://college-ka-canteen.herokuapp.com/orders/")
   lg.click()}
 
 
@@ -14,5 +14,5 @@ if(fl==0){
 
 }
 else{
-document.getElementById("login_form").setAttribute("action","http://127.0.0.1:8000/orders/")
+document.getElementById("login_form").setAttribute("action","https://college-ka-canteen.herokuapp.com/orders/")
 lg.click()}

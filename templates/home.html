@@ -19,8 +19,8 @@
     Action
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" href="http://college-ka-canteen.herokuapp.com">Home</a>
-    <a class="dropdown-item" href="http://college-ka-canteen.herokuapp.com/orders/">Orders</a>
+    <a class="dropdown-item" href="https://college-ka-canteen.herokuapp.com">Home</a>
+    <a class="dropdown-item" href="https://college-ka-canteen.herokuapp.com/orders/">Orders</a>
     <a class="dropdown-item" href="#">Help and support</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="#">Cantact Us</a>
@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="http://college-ka-canteen.herokuapp.com">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="https://college-ka-canteen.herokuapp.com">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Cantact Us</a>
@@ -43,7 +43,7 @@
             Category
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="http://college-ka-canteen.herokuapp.com/catogaries/fastfood/">FastFoods</a>
+            <a class="dropdown-item" href="https://college-ka-canteen.herokuapp.com/catogaries/fastfood/">FastFoods</a>
             <a class="dropdown-item" href="#">Sweets</a>
           <a class="dropdown-item" href="#">Chat</a>
           <a class="dropdown-item" href="#">Icecreams</a>
@@ -55,15 +55,15 @@
     </ul>
     {% block login %}
     {% if user_logged_in %}
-    <a href="http://college-ka-canteen.herokuapp.com/billing/" class="btn btn-info">
+    <a href="https://college-ka-canteen.herokuapp.com/billing/" class="btn btn-info">
 
       Cart <span id="cart" class="badge badge-light">{{cart_value}}</span>
       <span class="sr-only">unread messages</span></a>
     &nbsp&nbsp&nbsp&nbsp
-    <a href="http://college-ka-canteen.herokuapp.com/accounts/logout/">
+    <a href="https://college-ka-canteen.herokuapp.com/accounts/logout/">
     <button type="button" name="button" class="btn btn-danger" >Logout</button></a>&nbsp&nbsp&nbsp&nbsp
 {% else %}
-<a href="http://college-ka-canteen.herokuapp.com/signup/" class="btn btn-success" >Signup</a>&nbsp&nbsp&nbsp&nbsp
+<a href="https://college-ka-canteen.herokuapp.com/signup/" class="btn btn-success" >Signup</a>&nbsp&nbsp&nbsp&nbsp
 <button type="button" id="loginbutton" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Login</button>
 &nbsp&nbsp&nbsp&nbsp
 {% endif %}
@@ -158,7 +158,7 @@
 
           <input type="submit" name="login" value="Login" class="btn btn-primary">
         </form>
-        <form  action="http://college-ka-canteen.herokuapp.com/forgot_password/" method="post">
+        <form  action="https://college-ka-canteen.herokuapp.com/forgot_password/" method="post">
           <input type="submit" class="btn btn-danger" name="forgot" value="Forgot Password">
 {% csrf_token %}
         </form>
