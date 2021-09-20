@@ -30,7 +30,7 @@
 <div class="row justify-content-center" style="width:100%;margin:0px;">
 {% for x in cart_items %}
 <div class="col-md-5 col-xs-4" >
-<div class="card " >
+<div class="card " id="food_item_block{{x.food_id}}" >
   <img style="height:80%;width:100%;" src="https://college-ka-canteen.herokuapp.com/view_img/{{x.food_id}}/" class="mr-3" alt="...">
 
   <div class="card-body">
