@@ -13,7 +13,7 @@ if(xhr.status == 200){
 document.getElementById("loginbutton").click()
   }
   else{
-    xhr.open("post","https://college-ka-canteen.herokuapp.com/addtocart/"+document.getElementById("productid").getAttribute("action").charAt(50)+"/")
+    xhr.open("post","https://college-ka-canteen.herokuapp.com/addtocart/"+document.getElementById("productid").getAttribute("action").charAt(54)+"/")
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader("X-CSRFToken",document.cookie.substring(10))
     q=document.getElementById("qty").value
