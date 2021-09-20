@@ -31,6 +31,6 @@ xhr.send("food_id="+food_id)
 var x1=document.getElementsByClassName("food_item_block")
 
 for(i=0;i<x1.length;i++){
-var temp=x1[i].id.substr(15)
+var temp=x1[i].id.substr(6)
 document.getElementById("delete"+temp).addEventListener("click",remove);
 }
