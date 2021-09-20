@@ -257,9 +257,11 @@ def cancel(r):
 
         if(r.user.id is not None):
             user_logged_in=True
+            
             cart_value=cart.objects.filter(user_id=int(r.user.id)).aggregate(Sum("food_quantity")).get("food_quantity__sum")
             cart_value=0 if cart_value is None else cart_value
-            return render(r,"hcancel.html",{"user_logged_in":user_logged_in,"cart_value":cart_value})
+
+            return render(r,"cancel.html",{"user_logged_in":user_logged_in,"cart_value":cart_value})
     else:
         return redirect("https://college-ka-canteen.herokuapp.com")
 
