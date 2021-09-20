@@ -254,10 +254,11 @@ def payment(r):
         return redirect("https://college-ka-canteen.herokuapp.com")
 def cancel(r):
     if(r.method=="POST"):
+        print(r.user.id ,"user id is")
 
         if(r.user.id is not None):
             user_logged_in=True
-            
+
             cart_value=cart.objects.filter(user_id=int(r.user.id)).aggregate(Sum("food_quantity")).get("food_quantity__sum")
             cart_value=0 if cart_value is None else cart_value
 
