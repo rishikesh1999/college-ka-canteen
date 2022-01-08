@@ -22,8 +22,8 @@ static_dir=os.path.join(BASE_DIR,"static")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zy-rbq+ewqmd!bol$!_g-0&@_0o$ybgc^ldwy5n5hlj&o*y8=+'
+
+SECRET_KEY = ## SECURITY WARNING: keep the secret key used in production secret!
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
